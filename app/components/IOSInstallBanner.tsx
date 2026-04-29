@@ -19,7 +19,7 @@ export default function IOSInstallBanner() {
       if (Date.now() - dismissedAt < FOURTEEN_DAYS) return
     }
 
-    setVisible(true)
+    Promise.resolve().then(() => setVisible(true))
   }, [])
 
   const handleDismiss = () => {

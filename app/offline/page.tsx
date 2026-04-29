@@ -1,10 +1,12 @@
 'use client'
 
+import Link from 'next/link'
+
 export default function OfflinePage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4">
       {/* Logo */}
-      <a
+      <Link
         href="/"
         className="inline-flex items-center gap-2 text-green-600 mb-12"
       >
@@ -31,7 +33,7 @@ export default function OfflinePage() {
           />
         </svg>
         <span className="font-bold text-xl">AIBotBanao</span>
-      </a>
+      </Link>
 
       {/* Card */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-200 px-8 py-10 flex flex-col items-center max-w-sm w-full text-center">

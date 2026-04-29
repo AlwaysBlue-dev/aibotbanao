@@ -43,8 +43,9 @@ export const metadata: Metadata = {
     siteName: "AIBotBanao",
   },
   icons: {
-    icon: "/icon.svg",
-    apple: "/apple-touch-icon.png",
+    icon: [{ url: "/favicon.ico" }],
+    shortcut: "/favicon.ico",
+    apple: "/newlogo.png",
   },
 };
 
