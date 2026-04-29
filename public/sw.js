@@ -5,7 +5,6 @@ const PRECACHE_URLS = [
   '/setup',
   '/offline',
   '/manifest.json',
-  '/favicon.ico',
   '/newlogo.png',
   '/icon-192x192.png',
   '/icon-512x512.png',
