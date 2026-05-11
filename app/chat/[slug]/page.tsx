@@ -1,8 +1,41 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { supabase } from '@/lib/supabase'
-import type { Business } from '@/lib/supabase'
+import { createAdminClient } from '@/lib/supabase'
+import type { Business, Shop } from '@/lib/supabase'
 import ChatInterface from './ChatInterface'
+
+type BotMeta = { name: string; slug: string; isActive: boolean }
+
+async function fetchBotMeta(slug: string): Promise<BotMeta | null> {
+  const supabase = createAdminClient()
+
+  // Try shops first
+  const { data: shopRaw } = await supabase
+    .from('shops')
+    .select('shop_name, slug, is_active')
+    .eq('slug', slug)
+    .is('deleted_at', null)
+    .maybeSingle()
+
+  if (shopRaw) {
+    const shop = shopRaw as Pick<Shop, 'shop_name' | 'slug' | 'is_active'>
+    return { name: shop.shop_name, slug: shop.slug, isActive: shop.is_active }
+  }
+
+  // Legacy businesses table fallback
+  const { data: bizRaw } = await supabase
+    .from('businesses')
+    .select('name, slug')
+    .eq('slug', slug)
+    .maybeSingle()
+
+  if (bizRaw) {
+    const biz = bizRaw as Pick<Business, 'name' | 'slug'>
+    return { name: biz.name, slug: biz.slug, isActive: true }
+  }
+
+  return null
+}
 
 export async function generateMetadata({
   params,
@@ -10,20 +43,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const { data } = await supabase
-    .from('businesses')
-    .select('name, business_type')
-    .eq('slug', slug)
-    .single()
-  const businessMeta = data as Pick<Business, 'name' | 'business_type'> | null
+  const bot = await fetchBotMeta(slug)
 
-  if (!businessMeta) {
-    return { title: 'Bot Not Found | AIBotBanao' }
-  }
+  if (!bot) return { title: 'Bot Not Found | AIBotBanao' }
 
-  const title = `${businessMeta.name} — AI Assistant`
-  const description = `Chat with ${businessMeta.name}'s AI assistant. Get instant answers about products, prices, delivery, and more.`
-
+  const title = `${bot.name} — AI Assistant`
+  const description = `Chat with ${bot.name}'s AI assistant. Get instant answers about products, prices, delivery, and more.`
   return {
     title,
     description,
@@ -34,22 +59,13 @@ export async function generateMetadata({
 
 export default async function ChatPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string }>
-  searchParams: Promise<{ admin?: string }>
 }) {
   const { slug } = await params
-  const { admin } = await searchParams
+  const bot = await fetchBotMeta(slug)
 
-  const { data: business } = await supabase
-    .from('businesses')
-    .select('name, slug, admin_token')
-    .eq('slug', slug)
-    .single()
-  const businessData = business as Pick<Business, 'name' | 'slug' | 'admin_token'> | null
-
-  if (!businessData) {
+  if (!bot) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
         <div className="text-center max-w-sm">
@@ -70,14 +86,19 @@ export default async function ChatPage({
     )
   }
 
-  const isAdmin = !!(admin && businessData.admin_token && admin === businessData.admin_token)
+  if (!bot.isActive) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <div className="text-center max-w-sm">
+          <div className="text-7xl mb-6">😴</div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-3">Bot is currently offline</h1>
+          <p className="text-gray-500 mb-4">
+            {bot.name}&apos;s AI assistant is temporarily unavailable.
+          </p>
+        </div>
+      </div>
+    )
+  }
 
-  return (
-    <ChatInterface
-      businessName={businessData.name}
-      slug={businessData.slug}
-      isAdmin={isAdmin}
-      adminToken={isAdmin ? admin! : ''}
-    />
-  )
+  return <ChatInterface businessName={bot.name} slug={bot.slug} isAdmin={false} adminToken="" />
 }

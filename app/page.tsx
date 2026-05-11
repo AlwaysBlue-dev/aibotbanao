@@ -47,18 +47,17 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <BrandLogo textClassName="text-2xl" />
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium border border-gray-200 text-gray-600 bg-white hover:bg-gray-50 transition-colors"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-              Admin Dashboard
-              <span className="text-[10px] uppercase tracking-[0.08em] font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 px-2 py-0.5 rounded-full shadow-sm">
-                Coming Soon
-              </span>
-            </button>
             <Link
-              href="/setup"
+              href="/dashboard"
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-gray-900 text-white hover:bg-gray-800 transition-all hover:-translate-y-0.5 shadow-sm"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              </svg>
+              Dashboard
+            </Link>
+            <Link
+              href="/signup"
               className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
             >
               Get Started Free

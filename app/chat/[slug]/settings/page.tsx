@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-import type { Order } from '@/lib/supabase'
+import type { LegacyOrder as Order } from '@/lib/supabase'
 
 type Language = 'roman_urdu' | 'urdu' | 'english' | 'both'
 
