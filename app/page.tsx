@@ -60,10 +60,9 @@ export default function Home() {
             </Link>
             <Link
               href="/signup"
-              className="bg-green-600 hover:bg-green-700 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+              className="hidden sm:inline-flex bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
             >
-              <span className="hidden sm:inline">Get Started Free</span>
-              <span className="sm:hidden">Sign Up</span>
+              Get Started Free
             </Link>
           </div>
         </div>
