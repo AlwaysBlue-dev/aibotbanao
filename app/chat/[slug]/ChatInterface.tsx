@@ -252,7 +252,7 @@ export default function ChatInterface({
         ? data.reply
         : (typeof data.message === 'string' && data.message.trim()
             ? data.message
-            : 'Kuch masla aa gaya. Dobara try karein.')
+            : 'Something went wrong. Please try again.')
       const isErrorReply = !res.ok
 
       setMessages(prev => [
@@ -317,7 +317,7 @@ export default function ChatInterface({
   )
 
   const clearChat = () => {
-    const confirmed = window.confirm('Chat history clear karein?')
+    const confirmed = window.confirm('Clear chat history?')
     if (!confirmed) return
 
     localStorage.removeItem(storageKey)

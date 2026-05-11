@@ -115,7 +115,7 @@ export default function ShopSettingsForm({ shop }: { shop: Shop }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Products aur Prices</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">Products & Prices</label>
           <textarea
             value={products}
             onChange={(e) => setProducts(e.target.value)}

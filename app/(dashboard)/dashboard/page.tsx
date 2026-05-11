@@ -105,9 +105,9 @@ export default async function DashboardPage() {
       {/* Stats grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <ShopSlotIndicator used={shops.length} max={3} />
-        <StatCard label="Kul Orders" value={orders.length} sub="Total" color="blue" />
-        <StatCard label="Aaj ke Orders" value={ordersToday} sub="Aaj" color="violet" />
-        <StatCard label="Aaj ki Chats" value={chatsToday} sub="Aaj" color="amber" />
+        <StatCard label="Total Orders" value={orders.length} sub="Total" color="blue" />
+        <StatCard label="Today's Orders" value={ordersToday} sub="Today" color="violet" />
+        <StatCard label="Today's Chats" value={chatsToday} sub="Today" color="amber" />
       </div>
 
       {/* Shops quick list */}

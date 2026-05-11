@@ -41,10 +41,10 @@ const BUSINESS_TYPES = [
 const LANGUAGE_OPTIONS: {
   value: Language; label: string; sub: string; desc: string; example: string
 }[] = [
-  { value: 'roman_urdu', label: 'Roman Urdu', sub: 'رومن اردو', desc: 'Aap ki tarah likhein', example: '"Jee! Suit 2500 mein milta hai."' },
+  { value: 'roman_urdu', label: 'Roman Urdu', sub: 'رومن اردو', desc: 'Urdu words in English letters', example: '"Jee! Suit 2500 mein milta hai."' },
   { value: 'urdu',       label: 'اردو',        sub: 'Urdu Script', desc: 'اردو میں جواب',      example: '"جی! سوٹ ۲۵۰۰ میں ملتا ہے۔"' },
   { value: 'english',    label: 'English',     sub: 'English only', desc: 'Reply in English',  example: '"Yes! The suit is Rs 2500."' },
-  { value: 'both',       label: 'Auto',        sub: 'Automatic',    desc: 'Customer ki zaban mein', example: '"Recommended ✓"' },
+  { value: 'both',       label: 'Auto',        sub: 'Automatic',    desc: "Matches customer's language", example: '"Recommended ✓"' },
 ]
 
 const inputCls =

@@ -3,34 +3,13 @@ import Link from 'next/link'
 import { createSupabaseServerClient } from '@/lib/supabase-server'
 import type { Shop } from '@/lib/supabase'
 import DeleteShopButton from './DeleteShopButton'
+import EmbedCodeBlock from './EmbedCodeBlock'
 
 function EmbedCode({ slug }: { slug: string }) {
   const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? 'https://aibotbanao.com').replace(/\/$/, '')
   const scriptTag = `<script src="${appUrl}/embed.js" data-shop="${slug}" defer></script>`
   const chatUrl = `${appUrl}/chat/${slug}`
-
-  return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-      <h2 className="font-semibold text-gray-900 mb-1">Embed Code</h2>
-      <p className="text-sm text-gray-500 mb-4">
-        Paste this code inside the &lt;body&gt; tag of your website.
-      </p>
-      <div className="bg-gray-900 rounded-xl p-4 overflow-x-auto">
-        <code className="text-green-400 text-xs font-mono whitespace-nowrap">{scriptTag}</code>
-      </div>
-      <p className="text-xs text-gray-400 mt-3">
-        Direct chat link:{' '}
-        <a
-          href={chatUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-green-600 hover:underline"
-        >
-          {chatUrl.replace(/^https?:\/\//, '')}
-        </a>
-      </p>
-    </div>
-  )
+  return <EmbedCodeBlock scriptTag={scriptTag} chatUrl={chatUrl} />
 }
 
 export default async function ShopOverviewPage({
@@ -106,7 +85,7 @@ export default async function ShopOverviewPage({
       {/* Danger zone */}
       <div className="border border-red-100 rounded-2xl p-5">
         <h2 className="font-semibold text-red-700 mb-1">Danger Zone</h2>
-        <p className="text-sm text-gray-500 mb-4">Shop delete karne se sara data bhi remove ho jayega.</p>
+        <p className="text-sm text-gray-500 mb-4">Deleting this shop will permanently remove all its data.</p>
         <DeleteShopButton shopId={shop.id} shopName={shop.shop_name} />
       </div>
     </div>

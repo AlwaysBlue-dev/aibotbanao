@@ -291,7 +291,7 @@ export default function SetupPage() {
 
       if (!res.ok) {
         if (res.status === 429) {
-          setError('Aaj 3 bots already ban chuke hain. Kal dobara aayein!')
+          setError('You have already created 3 bots today. Please try again tomorrow.')
           return
         }
         throw new Error(
@@ -529,10 +529,10 @@ export default function SetupPage() {
                 <div className="grid grid-cols-2 gap-2">
                   {(
                     [
-                      { value: 'roman_urdu', label: 'Roman Urdu', sub: 'رومن اردو', desc: 'Aap ki tarah likhein', example: '"Jee! Suit 2500 mein milta hai."' },
+                      { value: 'roman_urdu', label: 'Roman Urdu', sub: 'رومن اردو', desc: 'Urdu words in English letters', example: '"Jee! Suit 2500 mein milta hai."' },
                       { value: 'urdu',       label: 'اردو',        sub: 'Urdu Script', desc: 'اردو میں جواب',      example: '"جی! سوٹ ۲۵۰۰ میں ملتا ہے۔"' },
                       { value: 'english',    label: 'English',     sub: 'English only', desc: 'Reply in English',  example: '"Yes! The suit is Rs 2500."' },
-                      { value: 'both',       label: 'Auto',        sub: 'Automatic',    desc: 'Customer ki zaban mein', example: '"Recommended ✓"' },
+                      { value: 'both',       label: 'Auto',        sub: 'Automatic',    desc: "Matches customer's language", example: '"Recommended ✓"' },
                     ] as const
                   ).map(({ value, label, sub, desc, example }) => (
                     <button

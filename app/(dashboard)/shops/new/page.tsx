@@ -173,10 +173,10 @@ export default function NewShopPage() {
 
         {step === 2 && (
           <div className="space-y-5">
-            <h2 className="font-semibold text-gray-900">Bot ki information</h2>
+            <h2 className="font-semibold text-gray-900">Bot Information</h2>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Products aur Prices <span className="text-red-500">*</span></label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Products & Prices <span className="text-red-500">*</span></label>
               <textarea
                 value={products}
                 onChange={(e) => setProducts(e.target.value)}
@@ -195,7 +195,7 @@ export default function NewShopPage() {
                 rows={3}
                 required
                 className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
-                placeholder="Karachi free delivery, baaki Pakistan Rs 200..."
+                placeholder="Karachi free delivery, rest of Pakistan Rs 200..."
               />
             </div>
 
@@ -218,7 +218,7 @@ export default function NewShopPage() {
                 onChange={(e) => setReturnPolicy(e.target.value)}
                 required
                 className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="3 din ke andar exchange, no cash refund"
+                placeholder="Exchange within 3 days, no cash refund"
               />
             </div>
 
@@ -242,10 +242,10 @@ export default function NewShopPage() {
 
         {step === 3 && (
           <div className="space-y-5">
-            <h2 className="font-semibold text-gray-900">Bot language aur final review</h2>
+            <h2 className="font-semibold text-gray-900">Bot Language & Final Review</h2>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Bot ki Language</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Bot Language</label>
               <div className="space-y-2">
                 {LANGUAGE_OPTIONS.map((opt) => (
                   <label key={opt.value} className="flex items-start gap-3 cursor-pointer">
