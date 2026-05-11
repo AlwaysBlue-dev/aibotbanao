@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
+import { createSupabaseServerClient } from '@/lib/supabase-server'
 
 export const metadata: Metadata = {
   title: 'Set Up Your Free Bot | AIBotBanao',
@@ -10,10 +12,13 @@ export const metadata: Metadata = {
   },
 }
 
-export default function SetupLayout({
+export default async function SetupLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const supabase = await createSupabaseServerClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect('/login?next=/setup')
   return <>{children}</>
 }
