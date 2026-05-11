@@ -35,13 +35,13 @@ export default function ForgotPasswordPage() {
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
           <div className="text-5xl mb-4">📨</div>
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Email bhej di</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Email sent</h2>
           <p className="text-gray-500 text-sm leading-relaxed">
-            Agar <strong>{email}</strong> registered hai toh aapko password reset link mil jayega.
-            Apna inbox check karein.
+            If <strong>{email}</strong> is registered, you&apos;ll receive a password reset link.
+            Check your inbox.
           </p>
           <Link href="/login" className="inline-block mt-6 text-sm text-green-600 hover:underline">
-            Login par wapas jayein
+            Back to login
           </Link>
         </div>
       </div>
@@ -51,9 +51,9 @@ export default function ForgotPasswordPage() {
   return (
     <div className="w-full max-w-md">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-1">Password reset karein</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-1">Reset Password</h1>
         <p className="text-gray-500 text-sm mb-6">
-          Apna email daalein — hum reset link bhej denge.
+          Enter your email — we&apos;ll send you a reset link.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -66,7 +66,7 @@ export default function ForgotPasswordPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              placeholder="aap@example.com"
+              placeholder="you@example.com"
             />
           </div>
 
@@ -79,13 +79,13 @@ export default function ForgotPasswordPage() {
             disabled={loading}
             className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white font-semibold py-2.5 rounded-lg text-sm transition-colors"
           >
-            {loading ? 'Bhej rahe hain…' : 'Reset Link Bhejein'}
+            {loading ? 'Sending…' : 'Send Reset Link'}
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-6">
           <Link href="/login" className="text-green-600 hover:underline">
-            Login par wapas jayein
+            Back to login
           </Link>
         </p>
       </div>

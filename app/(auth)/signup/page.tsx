@@ -17,7 +17,7 @@ export default function SignupPage() {
     setError('')
 
     if (password.length < 8) {
-      setError('Password kam az kam 8 characters ka hona chahiye.')
+      setError('Password must be at least 8 characters.')
       return
     }
 
@@ -48,10 +48,10 @@ export default function SignupPage() {
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
           <div className="text-5xl mb-4">📧</div>
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Email check karein</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Check your email</h2>
           <p className="text-gray-500 text-sm leading-relaxed">
-            Hum ne <strong>{email}</strong> par ek verification link bheja hai.
-            Link pe click kar ke apna account activate karein.
+            We sent a verification link to <strong>{email}</strong>.
+            Click the link to activate your account.
           </p>
         </div>
       </div>
@@ -61,12 +61,12 @@ export default function SignupPage() {
   return (
     <div className="w-full max-w-md">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-1">Account banayein</h1>
-        <p className="text-gray-500 text-sm mb-6">Bilkul free — koi credit card nahi</p>
+        <h1 className="text-2xl font-bold text-gray-900 mb-1">Create Account</h1>
+        <p className="text-gray-500 text-sm mb-6">100% free — no credit card required</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Pura naam</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Full name</label>
             <input
               type="text"
               autoComplete="name"
@@ -87,7 +87,7 @@ export default function SignupPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              placeholder="aap@example.com"
+              placeholder="you@example.com"
             />
           </div>
 
@@ -101,7 +101,7 @@ export default function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              placeholder="Kam az kam 8 characters"
+              placeholder="At least 8 characters"
             />
           </div>
 
@@ -114,14 +114,14 @@ export default function SignupPage() {
             disabled={loading}
             className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white font-semibold py-2.5 rounded-lg text-sm transition-colors"
           >
-            {loading ? 'Account ban raha hai…' : 'Account Banayein'}
+            {loading ? 'Creating account…' : 'Create Account'}
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-6">
-          Pehle se account hai?{' '}
+          Already have an account?{' '}
           <Link href="/login" className="text-green-600 font-medium hover:underline">
-            Sign In karein
+            Sign In
           </Link>
         </p>
       </div>

@@ -69,30 +69,43 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section className="flex-1 max-w-6xl mx-auto w-full px-4 sm:px-6 pt-8 pb-14 sm:pt-12 sm:pb-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section className="flex-1 max-w-6xl mx-auto w-full px-4 sm:px-6 pt-14 pb-8 sm:pt-2 sm:pb-12">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div>
-            <div className="inline-block bg-green-50 text-green-700 text-sm font-medium px-3 py-1 rounded-full mb-6 border border-green-200">
-              <span className="inline-flex items-center gap-2">
-                <Image src="/pakistan-flag.svg" alt="Pakistan flag" width={16} height={12} className="rounded-[2px]" />
-                Built for Pakistani businesses
-              </span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
               Free AI chatbot for your shop —{' '}
               <span className="text-green-600">ready in 5 minutes</span>
             </h1>
-            <p className="text-xl text-gray-500 mb-8 leading-relaxed">
-              Customers get instant answers. You save hours every day.
-            </p>
             <Link
               href="/setup"
-              className="inline-block bg-green-600 hover:bg-green-700 active:bg-green-800 text-white text-lg font-semibold px-8 py-4 rounded-xl shadow-lg shadow-green-200 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+              className="inline-block bg-green-600 hover:bg-green-700 active:bg-green-800 text-white text-lg font-semibold px-8 py-4 rounded-xl shadow-lg shadow-green-200 transition-all hover:-translate-y-0.5 hover:shadow-xl mb-3"
             >
               Create My Free Bot →
             </Link>
-            <p className="text-sm text-gray-400 mt-4">
+            <p className="text-sm text-gray-400 mb-5">
               No credit card required · Setup in 5 minutes
+            </p>
+
+            {/* Language badges */}
+            <div className="mb-4">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">Bot speaks your customers&apos; language</p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { label: 'Auto Detect', emoji: '🤖' },
+                  { label: 'English', emoji: '🇬🇧' },
+                  { label: 'Roman Urdu', emoji: '🇵🇰' },
+                  { label: 'اردو', emoji: '✍️' },
+                ].map((lang) => (
+                  <span key={lang.label} className="inline-flex items-center gap-1.5 bg-gray-50 border border-gray-200 text-gray-700 text-sm font-medium px-3 py-1.5 rounded-full">
+                    <span>{lang.emoji}</span>
+                    {lang.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <p className="text-base text-gray-500 leading-relaxed">
+              Customers get instant answers. You save hours every day.
             </p>
           </div>
 
@@ -146,10 +159,7 @@ export default function Home() {
       <footer className="border-t border-gray-100 py-8 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-gray-400">
           <span className="font-semibold text-gray-600">AIBotBanao</span>
-          <span className="inline-flex items-center gap-2">
-            Made in Pakistan
-            <Image src="/pakistan-flag.svg" alt="Pakistan flag" width={16} height={12} className="rounded-[2px]" />
-          </span>
+          <span className="text-gray-400">© {new Date().getFullYear()} AIBotBanao. All rights reserved.</span>
         </div>
       </footer>
     </div>

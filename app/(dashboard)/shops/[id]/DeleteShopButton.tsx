@@ -26,7 +26,7 @@ export default function DeleteShopButton({ shopId, shopName }: { shopId: string;
         onClick={() => setConfirm(true)}
         className="text-sm font-medium text-red-600 border border-red-200 px-4 py-2 rounded-xl hover:bg-red-50 transition-colors"
       >
-        Shop Delete Karein
+        Delete Shop
       </button>
     )
   }
@@ -34,7 +34,7 @@ export default function DeleteShopButton({ shopId, shopName }: { shopId: string;
   return (
     <div className="space-y-3">
       <p className="text-sm text-red-700 font-medium">
-        Kya aap sure hain? &ldquo;{shopName}&rdquo; delete ho jayegi.
+        Are you sure? &ldquo;{shopName}&rdquo; will be permanently deleted.
       </p>
       <div className="flex gap-3">
         <button
@@ -48,7 +48,7 @@ export default function DeleteShopButton({ shopId, shopName }: { shopId: string;
           disabled={loading}
           className="text-sm font-medium text-white bg-red-600 hover:bg-red-700 disabled:opacity-60 px-4 py-2 rounded-xl transition-colors"
         >
-          {loading ? 'Delete ho raha hai…' : 'Haan, Delete Karein'}
+          {loading ? 'Deleting…' : 'Yes, Delete'}
         </button>
       </div>
     </div>

@@ -13,7 +13,7 @@ function EmbedCode({ slug }: { slug: string }) {
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
       <h2 className="font-semibold text-gray-900 mb-1">Embed Code</h2>
       <p className="text-sm text-gray-500 mb-4">
-        Yeh code apni website ke &lt;body&gt; tag mein paste karein.
+        Paste this code inside the &lt;body&gt; tag of your website.
       </p>
       <div className="bg-gray-900 rounded-xl p-4 overflow-x-auto">
         <code className="text-green-400 text-xs font-mono whitespace-nowrap">{scriptTag}</code>

@@ -45,7 +45,7 @@ function ShopSlotIndicator({ used, max }: { used: number; max: number }) {
           />
         ))}
       </div>
-      <p className="text-xs text-gray-400">{max - used} slot{max - used !== 1 ? 's' : ''} baaki hain</p>
+      <p className="text-xs text-gray-400">{max - used} slot{max - used !== 1 ? 's' : ''} remaining</p>
     </div>
   )
 }
@@ -99,7 +99,7 @@ export default async function DashboardPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">{greeting(profile?.full_name ?? null)}</h1>
-        <p className="text-gray-500 text-sm mt-1">Yahan aapke sabhi shops ka overview hai.</p>
+        <p className="text-gray-500 text-sm mt-1">An overview of all your shops.</p>
       </div>
 
       {/* Stats grid */}
@@ -113,20 +113,20 @@ export default async function DashboardPage() {
       {/* Shops quick list */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-          <h2 className="font-semibold text-gray-900">Meri Shops</h2>
+          <h2 className="font-semibold text-gray-900">My Shops</h2>
           {shops.length < 3 && (
             <Link
               href="/shops/new"
               className="text-sm font-medium text-green-600 hover:underline"
             >
-              + Naya Shop
+              + New Shop
             </Link>
           )}
         </div>
 
         {shops.length === 0 ? (
           <div className="py-12 text-center">
-            <p className="text-gray-400 text-sm mb-4">Abhi koi shop nahi hai.</p>
+            <p className="text-gray-400 text-sm mb-4">No shops yet.</p>
             <Link
               href="/shops/new"
               className="inline-block bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors"

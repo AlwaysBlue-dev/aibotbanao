@@ -16,11 +16,11 @@ export default function ResetPasswordPage() {
     setError('')
 
     if (password.length < 8) {
-      setError('Password kam az kam 8 characters ka hona chahiye.')
+      setError('Password must be at least 8 characters.')
       return
     }
     if (password !== confirm) {
-      setError('Dono password match nahi kar rahe.')
+      setError('Passwords do not match.')
       return
     }
 
@@ -41,12 +41,12 @@ export default function ResetPasswordPage() {
   return (
     <div className="w-full max-w-md">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-1">Naya password set karein</h1>
-        <p className="text-gray-500 text-sm mb-6">Apna naya password daalein.</p>
+        <h1 className="text-2xl font-bold text-gray-900 mb-1">Set New Password</h1>
+        <p className="text-gray-500 text-sm mb-6">Enter your new password below.</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Naya password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">New password</label>
             <input
               type="password"
               autoComplete="new-password"
@@ -55,12 +55,12 @@ export default function ResetPasswordPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              placeholder="Kam az kam 8 characters"
+              placeholder="At least 8 characters"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Password dobara daalein</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Confirm password</label>
             <input
               type="password"
               autoComplete="new-password"
@@ -81,7 +81,7 @@ export default function ResetPasswordPage() {
             disabled={loading}
             className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white font-semibold py-2.5 rounded-lg text-sm transition-colors"
           >
-            {loading ? 'Update ho raha hai…' : 'Password Update Karein'}
+            {loading ? 'Updating…' : 'Update Password'}
           </button>
         </form>
       </div>

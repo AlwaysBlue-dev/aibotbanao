@@ -25,7 +25,7 @@ export default function LoginForm() {
 
     if (authError) {
       setError(authError.message === 'Invalid login credentials'
-        ? 'Email ya password galat hai.'
+        ? 'Incorrect email or password.'
         : authError.message)
       setLoading(false)
       return
@@ -38,8 +38,8 @@ export default function LoginForm() {
   return (
     <div className="w-full max-w-md">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-1">Wapas aaein</h1>
-        <p className="text-gray-500 text-sm mb-6">Apne account mein sign in karein</p>
+        <h1 className="text-2xl font-bold text-gray-900 mb-1">Welcome back</h1>
+        <p className="text-gray-500 text-sm mb-6">Sign in to your account</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -51,7 +51,7 @@ export default function LoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              placeholder="aap@example.com"
+              placeholder="you@example.com"
             />
           </div>
 
@@ -59,7 +59,7 @@ export default function LoginForm() {
             <div className="flex items-center justify-between mb-1.5">
               <label className="block text-sm font-medium text-gray-700">Password</label>
               <Link href="/forgot-password" className="text-xs text-green-600 hover:underline">
-                Password bhool gaye?
+                Forgot password?
               </Link>
             </div>
             <input
@@ -82,14 +82,14 @@ export default function LoginForm() {
             disabled={loading}
             className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white font-semibold py-2.5 rounded-lg text-sm transition-colors"
           >
-            {loading ? 'Sign in ho rahe hain…' : 'Sign In'}
+            {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-6">
-          Account nahi hai?{' '}
+          Don&apos;t have an account?{' '}
           <Link href="/signup" className="text-green-600 font-medium hover:underline">
-            Sign Up karein
+            Sign Up
           </Link>
         </p>
       </div>

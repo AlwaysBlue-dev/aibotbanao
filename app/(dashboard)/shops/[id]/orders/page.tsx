@@ -58,7 +58,7 @@ export default async function ShopOrdersPage({
       {orders.length === 0 ? (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm py-16 text-center">
           <div className="text-5xl mb-4">📦</div>
-          <p className="text-gray-500 text-sm">Abhi koi order nahi aya.</p>
+          <p className="text-gray-500 text-sm">No orders yet.</p>
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">

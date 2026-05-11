@@ -22,8 +22,8 @@ export default async function ShopsPage() {
     <div className="max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Meri Shops</h1>
-          <p className="text-sm text-gray-500 mt-1">{shops.length} / 3 shops use ho rahi hain</p>
+          <h1 className="text-2xl font-bold text-gray-900">My Shops</h1>
+          <p className="text-sm text-gray-500 mt-1">{shops.length} / 3 shops used</p>
         </div>
         {canCreate && (
           <Link
@@ -33,7 +33,7 @@ export default async function ShopsPage() {
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
-            Naya Shop
+            New Shop
           </Link>
         )}
       </div>
@@ -41,13 +41,13 @@ export default async function ShopsPage() {
       {shops.length === 0 ? (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm py-16 text-center">
           <div className="text-5xl mb-4">🏪</div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">Koi shop nahi</h2>
-          <p className="text-gray-500 text-sm mb-6">Apna pehla shop banayein aur AI bot shuru karein.</p>
+          <h2 className="text-lg font-semibold text-gray-900 mb-2">No shops yet</h2>
+          <p className="text-gray-500 text-sm mb-6">Create your first shop and start your AI bot.</p>
           <Link
             href="/shops/new"
             className="inline-block bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-6 py-3 rounded-xl transition-colors"
           >
-            Pehla Shop Banayein
+            Create Your First Shop
           </Link>
         </div>
       ) : (
@@ -79,7 +79,7 @@ export default async function ShopsPage() {
 
           {!canCreate && (
             <div className="bg-amber-50 border border-amber-100 rounded-2xl px-5 py-4 text-sm text-amber-800">
-              Aap ne maximum 3 shops bana li hain. Naya shop banane ke liye pehle ek delete karein.
+              You&apos;ve reached the maximum of 3 shops. Delete one to create a new shop.
             </div>
           )}
         </div>

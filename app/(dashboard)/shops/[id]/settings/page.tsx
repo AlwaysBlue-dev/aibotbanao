@@ -27,7 +27,7 @@ export default async function ShopSettingsPage({
     <div className="w-full">
       <div className="mb-6">
         <h2 className="text-lg font-semibold text-gray-900">Shop Settings</h2>
-        <p className="text-sm text-gray-500 mt-0.5">Bot config aur shop details update karein</p>
+        <p className="text-sm text-gray-500 mt-0.5">Update bot config and shop details</p>
       </div>
       <ShopSettingsForm shop={shopRaw as Shop} />
     </div>

@@ -7,10 +7,10 @@ import { createSupabaseBrowserClient } from '@/lib/supabase-browser'
 type Step = 1 | 2 | 3
 
 const LANGUAGE_OPTIONS = [
-  { value: 'roman_urdu', label: 'Roman Urdu', desc: 'Urdu words English letters mein' },
-  { value: 'urdu', label: 'اردو', desc: 'Urdu script mein' },
-  { value: 'english', label: 'English', desc: 'English mein' },
-  { value: 'auto', label: 'Auto-detect', desc: 'Customer ki language mein jawab' },
+  { value: 'roman_urdu', label: 'Roman Urdu', desc: 'Urdu words in English letters' },
+  { value: 'urdu', label: 'اردو', desc: 'Urdu script' },
+  { value: 'english', label: 'English', desc: 'In English' },
+  { value: 'auto', label: 'Auto-detect', desc: "Responds in customer's language" },
 ]
 
 function slugify(str: string) {
@@ -78,9 +78,9 @@ export default function NewShopPage() {
 
     if (insertError) {
       setError(insertError.message.includes('Shop limit')
-        ? 'Aap maximum 3 shops bana sakte hain.'
+        ? 'You can create a maximum of 3 shops.'
         : insertError.message.includes('unique') || insertError.message.includes('duplicate')
-        ? 'Yeh slug pehle se use ho raha hai. Dusra naam try karein.'
+        ? 'This slug is already taken. Try a different name.'
         : insertError.message)
       setLoading(false)
       return
@@ -96,7 +96,7 @@ export default function NewShopPage() {
   return (
     <div className="w-full">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Naya Shop</h1>
+        <h1 className="text-2xl font-bold text-gray-900">New Shop</h1>
         <p className="text-sm text-gray-500 mt-1">Step {step} of 3</p>
       </div>
 
@@ -184,7 +184,7 @@ export default function NewShopPage() {
                 className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
                 placeholder={`Lawn Suit - Rs 2500\nEmbroided Shirt - Rs 1800\nDupatta - Rs 500`}
               />
-              <p className="text-xs text-gray-400 mt-1">Har product alag line mein likhein</p>
+              <p className="text-xs text-gray-400 mt-1">Enter each product on a separate line</p>
             </div>
 
             <div>
@@ -273,7 +273,7 @@ export default function NewShopPage() {
                 onChange={(e) => setDescription(e.target.value)}
                 rows={3}
                 className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
-                placeholder="Apni shop ke baare mein thodi si description..."
+                placeholder="Brief description about your shop..."
               />
             </div>
 

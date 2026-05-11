@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -41,7 +41,7 @@ function ShieldIcon() {
 
 const NAV: NavItem[] = [
   { label: 'Dashboard', href: '/dashboard', icon: <HomeIcon /> },
-  { label: 'Meri Shops', href: '/shops', icon: <ShopIcon /> },
+  { label: 'My Shops', href: '/shops', icon: <ShopIcon /> },
   { label: 'Profile', href: '/profile', icon: <UserIcon /> },
 ]
 

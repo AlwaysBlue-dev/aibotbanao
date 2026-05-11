@@ -176,14 +176,14 @@ export default function ShopSettingsForm({ shop }: { shop: Shop }) {
       </div>
 
       {error && <p className="text-sm text-red-600 bg-red-50 px-4 py-3 rounded-xl">{error}</p>}
-      {success && <p className="text-sm text-green-700 bg-green-50 px-4 py-3 rounded-xl">Settings save ho gayi!</p>}
+      {success && <p className="text-sm text-green-700 bg-green-50 px-4 py-3 rounded-xl">Settings saved!</p>}
 
       <button
         type="submit"
         disabled={loading}
         className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white font-semibold py-3 rounded-xl text-sm transition-colors"
       >
-        {loading ? 'Save ho rahi hain…' : 'Settings Save Karein'}
+        {loading ? 'Saving…' : 'Save Settings'}
       </button>
     </form>
   )

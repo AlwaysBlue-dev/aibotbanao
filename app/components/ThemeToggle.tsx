@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useTheme } from './ThemeProvider'
 
@@ -8,7 +8,7 @@ export default function ThemeToggle({ className = '' }: { className?: string }) 
   return (
     <button
       onClick={toggle}
-      aria-label={isDark ? 'Light mode on karein' : 'Dark mode on karein'}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Light mode' : 'Dark mode'}
       className={`p-2 rounded-xl transition-colors ${
         isDark

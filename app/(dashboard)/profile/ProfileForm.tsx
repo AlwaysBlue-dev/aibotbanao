@@ -34,7 +34,7 @@ export default function ProfileForm({
     const file = e.target.files?.[0]
     if (!file) return
     if (file.size > 2 * 1024 * 1024) {
-      setProfileError('File 2MB se badi nahi honi chahiye.')
+      setProfileError('File must not exceed 2MB.')
       return
     }
 
@@ -45,7 +45,6 @@ export default function ProfileForm({
     if (!user) return
 
     const ext = file.name.split('.').pop()
-    // Path is relative to the bucket root — do NOT repeat the bucket name here
     const path = `${user.id}.${ext}`
 
     const { error: uploadError } = await supabase.storage
@@ -53,7 +52,7 @@ export default function ProfileForm({
       .upload(path, file, { upsert: true })
 
     if (uploadError) {
-      setProfileError('Upload fail ho gayi: ' + uploadError.message)
+      setProfileError('Upload failed: ' + uploadError.message)
       setUploading(false)
       return
     }
@@ -81,7 +80,7 @@ export default function ProfileForm({
     if (error) {
       setProfileError(error.message)
     } else {
-      setProfileMsg('Profile update ho gayi!')
+      setProfileMsg('Profile updated!')
       router.refresh()
     }
     setSaving(false)
@@ -93,18 +92,17 @@ export default function ProfileForm({
     setPwdError('')
 
     if (newPwd.length < 8) {
-      setPwdError('Naya password 8 characters se lamba hona chahiye.')
+      setPwdError('New password must be at least 8 characters.')
       return
     }
     if (newPwd !== confirmPwd) {
-      setPwdError('Dono passwords match nahi kar rahe.')
+      setPwdError('Passwords do not match.')
       return
     }
 
     setPwdLoading(true)
     const supabase = createSupabaseBrowserClient()
 
-    // Re-authenticate with current password first
     const { data: { user } } = await supabase.auth.getUser()
     if (!user?.email) { router.push('/login'); return }
 
@@ -114,7 +112,7 @@ export default function ProfileForm({
     })
 
     if (signInError) {
-      setPwdError('Purana password galat hai.')
+      setPwdError('Current password is incorrect.')
       setPwdLoading(false)
       return
     }
@@ -123,7 +121,7 @@ export default function ProfileForm({
     if (error) {
       setPwdError(error.message)
     } else {
-      setPwdMsg('Password update ho gaya!')
+      setPwdMsg('Password updated!')
       setCurrentPwd('')
       setNewPwd('')
       setConfirmPwd('')
@@ -137,11 +135,9 @@ export default function ProfileForm({
 
   return (
     <div className="space-y-6">
-      {/* Profile card */}
       <form onSubmit={saveProfile} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
         <h2 className="font-semibold text-gray-900">Personal Info</h2>
 
-        {/* Avatar */}
         <div className="flex items-center gap-4">
           <div className="relative w-16 h-16 rounded-full overflow-hidden bg-green-100 flex-shrink-0">
             {avatarUrl ? (
@@ -159,7 +155,7 @@ export default function ProfileForm({
               disabled={uploading}
               className="text-sm font-medium text-green-600 hover:underline disabled:opacity-50"
             >
-              {uploading ? 'Upload ho rahi hai…' : 'Photo change karein'}
+              {uploading ? 'Uploading…' : 'Change photo'}
             </button>
             <p className="text-xs text-gray-400 mt-0.5">JPG, PNG — max 2MB</p>
             <input
@@ -173,7 +169,7 @@ export default function ProfileForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Pura naam</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">Full name</label>
           <input
             type="text"
             value={fullName}
@@ -201,16 +197,15 @@ export default function ProfileForm({
           disabled={saving}
           className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors"
         >
-          {saving ? 'Save ho raha hai…' : 'Profile Save Karein'}
+          {saving ? 'Saving…' : 'Save Profile'}
         </button>
       </form>
 
-      {/* Change password card */}
       <form onSubmit={changePassword} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
-        <h2 className="font-semibold text-gray-900">Password Change Karein</h2>
+        <h2 className="font-semibold text-gray-900">Change Password</h2>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Purana password</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">Current password</label>
           <input
             type="password"
             value={currentPwd}
@@ -222,7 +217,7 @@ export default function ProfileForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Naya password</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">New password</label>
           <input
             type="password"
             value={newPwd}
@@ -230,12 +225,12 @@ export default function ProfileForm({
             required
             minLength={8}
             className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="Kam az kam 8 characters"
+            placeholder="At least 8 characters"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Naya password confirm</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">Confirm new password</label>
           <input
             type="password"
             value={confirmPwd}
@@ -254,7 +249,7 @@ export default function ProfileForm({
           disabled={pwdLoading}
           className="w-full border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-60 font-semibold py-2.5 rounded-xl text-sm transition-colors"
         >
-          {pwdLoading ? 'Update ho raha hai…' : 'Password Update Karein'}
+          {pwdLoading ? 'Updating…' : 'Update Password'}
         </button>
       </form>
     </div>

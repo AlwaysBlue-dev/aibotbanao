@@ -25,7 +25,7 @@ export default function BotToggle({ shopId, isActive }: { shopId: string; isActi
       className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
         active ? 'bg-green-500' : 'bg-gray-200'
       } disabled:opacity-60`}
-      aria-label={active ? 'Bot off karein' : 'Bot on karein'}
+      aria-label={active ? 'Turn bot off' : 'Turn bot on'}
     >
       <span
         className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-sm transition-transform ${

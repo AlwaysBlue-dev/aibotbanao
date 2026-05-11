@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
@@ -11,7 +11,7 @@ import type { Profile } from '@/lib/supabase'
 
 const NAV = [
   { label: 'Dashboard', href: '/dashboard' },
-  { label: 'Meri Shops', href: '/shops' },
+  { label: 'My Shops', href: '/shops' },
   { label: 'Profile', href: '/profile' },
 ]
 

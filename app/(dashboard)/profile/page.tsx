@@ -18,7 +18,7 @@ export default async function ProfilePage() {
     <div className="max-w-xl mx-auto">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
-        <p className="text-sm text-gray-500 mt-1">Apni account details update karein.</p>
+        <p className="text-sm text-gray-500 mt-1">Update your account details.</p>
       </div>
       <ProfileForm profile={profileRaw as Profile | null} userEmail={user.email ?? ''} />
     </div>
