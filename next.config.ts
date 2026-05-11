@@ -1,9 +1,18 @@
 import type { NextConfig } from "next";
 
+// Applied to every route except /chat/* and /embed.js
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+];
+
+// /chat/* pages must be embeddable in external iframes — no frame restriction
+const chatHeaders = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  // Allow any origin to embed this page in an iframe
+  { key: "Content-Security-Policy", value: "frame-ancestors *" },
 ];
 
 const nextConfig: NextConfig = {
@@ -29,8 +38,14 @@ const nextConfig: NextConfig = {
           { key: "Service-Worker-Allowed", value: "/" },
         ],
       },
+      // Chat pages — embeddable by external sites
       {
-        source: "/(.*)",
+        source: "/chat/:slug*",
+        headers: chatHeaders,
+      },
+      // Everything else — deny framing
+      {
+        source: "/((?!chat/).*)",
         headers: securityHeaders,
       },
     ];
