@@ -10,31 +10,21 @@ interface BeforeInstallPromptEvent extends Event {
 interface InstallContextValue {
   canInstall: boolean
   isIOS: boolean
-  isInstalled: boolean
   install: () => Promise<void>
 }
 
 const InstallCtx = createContext<InstallContextValue>({
   canInstall: false,
   isIOS: false,
-  isInstalled: false,
   install: async () => {},
 })
-
-const INSTALLED_KEY = 'aibotbanao_installed'
 
 export function InstallProvider({ children }: { children: React.ReactNode }) {
   const [canInstall, setCanInstall] = useState(false)
   const [isIOS, setIsIOS] = useState(false)
-  const [isInstalled, setIsInstalled] = useState(false)
   const deferredPrompt = useRef<BeforeInstallPromptEvent | null>(null)
 
   useEffect(() => {
-    if (localStorage.getItem(INSTALLED_KEY) === 'true') {
-      setIsInstalled(true)
-      return
-    }
-
     const ios = /iphone|ipad|ipod/i.test(navigator.userAgent)
     setIsIOS(ios)
     if (ios) return
@@ -44,36 +34,20 @@ export function InstallProvider({ children }: { children: React.ReactNode }) {
       deferredPrompt.current = e as BeforeInstallPromptEvent
       setCanInstall(true)
     }
-    const installedHandler = () => {
-      setCanInstall(false)
-      setIsInstalled(true)
-      localStorage.setItem(INSTALLED_KEY, 'true')
-      deferredPrompt.current = null
-    }
 
     window.addEventListener('beforeinstallprompt', handler)
-    window.addEventListener('appinstalled', installedHandler)
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handler)
-      window.removeEventListener('appinstalled', installedHandler)
-    }
+    return () => window.removeEventListener('beforeinstallprompt', handler)
   }, [])
 
   const install = useCallback(async () => {
     const prompt = deferredPrompt.current
     if (!prompt) return
     await prompt.prompt()
-    const { outcome } = await prompt.userChoice
-    if (outcome === 'accepted') {
-      setCanInstall(false)
-      setIsInstalled(true)
-      localStorage.setItem(INSTALLED_KEY, 'true')
-    }
     deferredPrompt.current = null
   }, [])
 
   return (
-    <InstallCtx.Provider value={{ canInstall, isIOS, isInstalled, install }}>
+    <InstallCtx.Provider value={{ canInstall, isIOS, install }}>
       {children}
     </InstallCtx.Provider>
   )

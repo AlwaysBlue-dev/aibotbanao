@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { useInstall } from './InstallContext'
 
 export default function InstallNavButton() {
-  const { canInstall, isIOS, isInstalled, install } = useInstall()
+  const { canInstall, isIOS, install } = useInstall()
   const [showTip, setShowTip] = useState(false)
 
-  if (isInstalled || (!canInstall && !isIOS)) return null
+  if (!canInstall && !isIOS) return null
 
   const handleClick = async () => {
     if (canInstall) {

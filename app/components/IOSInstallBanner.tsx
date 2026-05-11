@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react'
 import { useInstall } from './InstallContext'
 
 export default function IOSInstallBanner() {
-  const { isIOS, isInstalled } = useInstall()
+  const { isIOS } = useInstall()
   const [visible, setVisible] = useState(false)
   const [sessionDismissed, setSessionDismissed] = useState(false)
 
   useEffect(() => {
-    if (!isIOS || isInstalled || sessionDismissed) return
+    if (!isIOS || sessionDismissed) return
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches
     if (!isStandalone) setVisible(true)
   }, [isIOS, isInstalled, sessionDismissed])
