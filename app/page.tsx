@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import MockChat from './components/MockChat'
 import BrandLogo from './components/BrandLogo'
 import InstallNavButton from './components/InstallNavButton'
@@ -70,7 +69,7 @@ export default function Home() {
 
       {/* Hero */}
       <section className="flex-1 max-w-6xl mx-auto w-full px-4 sm:px-6 pt-14 pb-8 sm:pt-2 sm:pb-12">
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
           <div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
               Free AI chatbot for your shop —{' '}
