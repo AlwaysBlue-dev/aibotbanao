@@ -52,8 +52,8 @@ function ShopSlotIndicator({ used, max }: { used: number; max: number }) {
 
 function greeting(name: string | null) {
   const hour = new Date().getHours()
-  const time = hour < 12 ? 'Subah bakhair' : hour < 17 ? 'Dopehar bakhair' : 'Shaam bakhair'
-  return `${time}, ${name?.split(' ')[0] || 'Sahib'}!`
+  const time = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
+  return `${time}, ${name?.split(' ')[0] || 'there'}!`
 }
 
 export default async function DashboardPage() {

@@ -12,7 +12,7 @@ export default function IOSInstallBanner() {
     if (!isIOS || sessionDismissed) return
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches
     if (!isStandalone) setVisible(true)
-  }, [isIOS, isInstalled, sessionDismissed])
+  }, [isIOS, sessionDismissed])
 
   // Auto-dismiss after 6 seconds
   useEffect(() => {

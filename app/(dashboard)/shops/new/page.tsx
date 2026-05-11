@@ -91,10 +91,10 @@ export default function NewShopPage() {
   }
 
   const canGoNext1 = shopName.trim().length >= 3 && slug.trim().length >= 2 && businessType.trim().length >= 2
-  const canGoNext2 = products.trim().length >= 10
+  const canGoNext2 = products.trim().length >= 10 && deliveryInfo.trim().length >= 5 && returnPolicy.trim().length >= 5
 
   return (
-    <div className="max-w-xl mx-auto">
+    <div className="w-full">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Naya Shop</h1>
         <p className="text-sm text-gray-500 mt-1">Step {step} of 3</p>
@@ -113,7 +113,7 @@ export default function NewShopPage() {
             <h2 className="font-semibold text-gray-900">Shop ki basic info</h2>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Shop ka naam *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Shop ka naam <span className="text-red-500">*</span></label>
               <input
                 type="text"
                 value={shopName}
@@ -124,7 +124,7 @@ export default function NewShopPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">URL Slug *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">URL Slug <span className="text-red-500">*</span></label>
               <div className="flex items-center rounded-lg border border-gray-200 overflow-hidden focus-within:ring-2 focus-within:ring-green-500">
                 <span className="px-3 py-2.5 bg-gray-50 text-gray-400 text-sm border-r border-gray-200 flex-shrink-0">
                   /chat/
@@ -140,7 +140,7 @@ export default function NewShopPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Business type *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Business type <span className="text-red-500">*</span></label>
               <input
                 type="text"
                 value={businessType}
@@ -166,7 +166,7 @@ export default function NewShopPage() {
               disabled={!canGoNext1}
               className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors"
             >
-              Agla Step →
+              Next →
             </button>
           </div>
         )}
@@ -176,7 +176,7 @@ export default function NewShopPage() {
             <h2 className="font-semibold text-gray-900">Bot ki information</h2>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Products aur Prices *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Products aur Prices <span className="text-red-500">*</span></label>
               <textarea
                 value={products}
                 onChange={(e) => setProducts(e.target.value)}
@@ -188,11 +188,12 @@ export default function NewShopPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Delivery info</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Delivery info <span className="text-red-500">*</span></label>
               <textarea
                 value={deliveryInfo}
                 onChange={(e) => setDeliveryInfo(e.target.value)}
                 rows={3}
+                required
                 className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
                 placeholder="Karachi free delivery, baaki Pakistan Rs 200..."
               />
@@ -210,11 +211,12 @@ export default function NewShopPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Return Policy</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Return Policy <span className="text-red-500">*</span></label>
               <input
                 type="text"
                 value={returnPolicy}
                 onChange={(e) => setReturnPolicy(e.target.value)}
+                required
                 className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="3 din ke andar exchange, no cash refund"
               />
@@ -225,14 +227,14 @@ export default function NewShopPage() {
                 onClick={() => setStep(1)}
                 className="flex-1 border border-gray-200 text-gray-700 font-semibold py-2.5 rounded-xl text-sm hover:bg-gray-50 transition-colors"
               >
-                ← Pichla
+                ← Back
               </button>
               <button
                 onClick={() => setStep(3)}
                 disabled={!canGoNext2}
                 className="flex-1 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors"
               >
-                Agla Step →
+                Next →
               </button>
             </div>
           </div>
@@ -293,14 +295,14 @@ export default function NewShopPage() {
                 onClick={() => setStep(2)}
                 className="flex-1 border border-gray-200 text-gray-700 font-semibold py-2.5 rounded-xl text-sm hover:bg-gray-50 transition-colors"
               >
-                ← Pichla
+                ← Back
               </button>
               <button
                 onClick={handleSubmit}
                 disabled={loading}
                 className="flex-1 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors"
               >
-                {loading ? 'Ban raha hai…' : 'Shop Banayein'}
+                {loading ? 'Creating…' : 'Finish'}
               </button>
             </div>
           </div>

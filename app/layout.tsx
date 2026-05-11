@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
 import ServiceWorkerRegistration from "./components/ServiceWorkerRegistration";
 import InstallPrompt from "./components/InstallPrompt";
 import IOSInstallBanner from "./components/IOSInstallBanner";
@@ -61,6 +62,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <NextTopLoader color="#16a34a" height={3} showSpinner={false} />
         <InstallProvider>
           {children}
           <ServiceWorkerRegistration />
