@@ -5,12 +5,19 @@ function normalizeUrl(url: string): string {
   return url.trim().replace(/\/$/, '')
 }
 
+/** Production URL for auth emails and post-login redirects (never localhost). */
+export function getProductionAppUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_APP_URL?.trim()
+  if (fromEnv) return normalizeUrl(fromEnv)
+  return DEFAULT_APP_URL
+}
+
 /**
- * Public site URL for auth email links and post-confirm redirects.
- * Prefer NEXT_PUBLIC_APP_URL; in production builds never fall back to localhost.
+ * Public site URL; prefers NEXT_PUBLIC_APP_URL.
+ * In production, ignores localhost from clientOrigin.
  */
 export function getAppUrl(clientOrigin?: string): string {
-  const fromEnv = process.env.NEXT_PUBLIC_APP_URL
+  const fromEnv = process.env.NEXT_PUBLIC_APP_URL?.trim()
   if (fromEnv) return normalizeUrl(fromEnv)
 
   if (clientOrigin) {
@@ -28,10 +35,10 @@ export function getAppUrl(clientOrigin?: string): string {
   return DEFAULT_APP_URL
 }
 
-export function authConfirmUrl(clientOrigin?: string): string {
-  return `${getAppUrl(clientOrigin)}/auth/confirm`
+export function authConfirmUrl(): string {
+  return `${getProductionAppUrl()}/auth/confirm`
 }
 
-export function resetPasswordUrl(clientOrigin?: string): string {
-  return `${getAppUrl(clientOrigin)}/reset-password`
+export function resetPasswordUrl(): string {
+  return `${getProductionAppUrl()}/reset-password`
 }

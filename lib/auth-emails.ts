@@ -1,3 +1,5 @@
+import { authConfirmUrl, getProductionAppUrl } from '@/lib/app-url'
+
 type EmailActionType =
   | 'signup'
   | 'invite'
@@ -51,18 +53,61 @@ function escapeHtml(value: string): string {
     .replace(/"/g, '&quot;')
 }
 
-export function buildSupabaseVerifyUrl(
-  tokenHash: string,
-  actionType: string,
-  redirectTo: string
-): string {
-  const base = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '')
+/** Direct link to your live site — avoids Supabase verify redirecting to localhost. */
+export function buildAuthEmailLink(tokenHash: string, actionType: string): string {
+  if (!tokenHash) {
+    throw new Error('Missing token_hash in hook payload')
+  }
+
+  const action = actionType.toLowerCase() as EmailActionType
+  const base = getProductionAppUrl()
+
+  if (action === 'recovery') {
+    const url = new URL(`${base}/auth/confirm`)
+    url.searchParams.set('token_hash', tokenHash)
+    url.searchParams.set('type', 'recovery')
+    url.searchParams.set('next', '/reset-password')
+    return url.toString()
+  }
+
+  const confirmActions: EmailActionType[] = [
+    'signup',
+    'email',
+    'invite',
+    'magiclink',
+    'email_change',
+    'reauthentication',
+  ]
+
+  if (confirmActions.includes(action)) {
+    const url = new URL(authConfirmUrl())
+    url.searchParams.set('token_hash', tokenHash)
+    url.searchParams.set('type', action)
+    return url.toString()
+  }
+
+  const supabaseBase = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').replace(/\/$/, '')
   const params = new URLSearchParams({
     token: tokenHash,
-    type: actionType,
-    redirect_to: redirectTo,
+    type: action,
+    redirect_to: authConfirmUrl(),
   })
-  return `${base}/auth/v1/verify?${params.toString()}`
+  return `${supabaseBase}/auth/v1/verify?${params.toString()}`
+}
+
+export function normalizeAuthEmailPayload(body: Record<string, unknown>): AuthEmailPayload {
+  const email_data = (body.email_data ?? body.email) as AuthEmailPayload['email_data']
+  const user = body.user as AuthEmailPayload['user']
+  if (!user?.email || !email_data?.email_action_type) {
+    throw new Error('Invalid hook payload: missing user.email or email_data')
+  }
+  return {
+    user,
+    email_data: {
+      ...email_data,
+      email_action_type: String(email_data.email_action_type).toLowerCase() as AuthEmailPayload['email_data']['email_action_type'],
+    },
+  }
 }
 
 function emailShell(title: string, body: string): string {
@@ -109,11 +154,10 @@ export function buildAuthEmail(
   options?: { tokenHash?: string; token?: string; toEmail?: string }
 ): { to: string; subject: string; html: string } | null {
   const { user, email_data } = payload
-  const action = email_data.email_action_type
+  const action = email_data.email_action_type.toLowerCase() as EmailActionType
   const to = options?.toEmail ?? user.email
   const tokenHash = options?.tokenHash ?? email_data.token_hash
   const token = options?.token ?? email_data.token
-  const redirectTo = email_data.redirect_to
   const name = user.user_metadata?.full_name?.split(' ')[0] ?? 'there'
 
   const subject = SUBJECTS[action]
@@ -132,7 +176,7 @@ export function buildAuthEmail(
     }
   }
 
-  const verifyUrl = buildSupabaseVerifyUrl(tokenHash, action, redirectTo)
+  const verifyUrl = buildAuthEmailLink(tokenHash, action)
 
   const copy: Record<string, { title: string; intro: string; cta: string }> = {
     signup: {

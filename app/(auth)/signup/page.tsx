@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { createSupabaseBrowserClient } from '@/lib/supabase-browser'
 import { authConfirmUrl } from '@/lib/app-url'
+import { formatAuthError } from '@/lib/format-auth-error'
 
 export default function SignupPage() {
   const [fullName, setFullName] = useState('')
@@ -29,12 +30,12 @@ export default function SignupPage() {
       password,
       options: {
         data: { full_name: fullName },
-        emailRedirectTo: authConfirmUrl(window.location.origin),
+        emailRedirectTo: authConfirmUrl(),
       },
     })
 
     if (authError) {
-      setError(authError.message)
+      setError(formatAuthError(authError.message))
       setLoading(false)
       return
     }
