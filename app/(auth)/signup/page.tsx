@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { createSupabaseBrowserClient } from '@/lib/supabase-browser'
+import { authConfirmUrl } from '@/lib/app-url'
 
 export default function SignupPage() {
   const [fullName, setFullName] = useState('')
@@ -23,13 +24,12 @@ export default function SignupPage() {
 
     setLoading(true)
     const supabase = createSupabaseBrowserClient()
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? window.location.origin
     const { error: authError } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: { full_name: fullName },
-        emailRedirectTo: `${appUrl}/auth/confirm`,
+        emailRedirectTo: authConfirmUrl(window.location.origin),
       },
     })
 

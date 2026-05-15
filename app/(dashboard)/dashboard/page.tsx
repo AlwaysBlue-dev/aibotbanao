@@ -131,7 +131,7 @@ export default async function DashboardPage() {
               href="/shops/new"
               className="inline-block bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors"
             >
-              Pehla Shop Banayein
+              Create your first bot
             </Link>
           </div>
         ) : (
@@ -146,13 +146,13 @@ export default async function DashboardPage() {
                     className="flex items-center justify-between px-5 py-4 hover:bg-gray-50 transition-colors"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${shop.is_active ? 'bg-green-500' : 'bg-gray-300'}`} />
+                      <div className={`w-2.5 h-2.5 rounded-full shrink-0 ${shop.is_active ? 'bg-green-500' : 'bg-gray-300'}`} />
                       <div className="min-w-0">
                         <p className="font-medium text-gray-900 truncate">{shop.shop_name}</p>
                         <p className="text-xs text-gray-400 truncate">/{shop.slug}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4 text-xs text-gray-400 flex-shrink-0 ml-4">
+                    <div className="flex items-center gap-4 text-xs text-gray-400 shrink-0 ml-4">
                       <span>{shopOrders} orders</span>
                       <span>{shopChats} chats</span>
                       <svg className="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
