@@ -18,5 +18,13 @@ export function formatAuthError(message: string): string {
     return 'We could not send the verification email. Please try again in a few minutes.'
   }
 
+  if (lower.includes('invalid login')) {
+    return 'Incorrect email or password.'
+  }
+
+  if (lower.includes('email not confirmed')) {
+    return 'Please confirm your email first. Check your inbox for the verification link.'
+  }
+
   return message
 }

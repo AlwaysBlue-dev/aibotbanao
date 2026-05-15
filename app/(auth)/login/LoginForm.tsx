@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createSupabaseBrowserClient } from '@/lib/supabase-browser'
+import { formatAuthError } from '@/lib/format-auth-error'
 
 export default function LoginForm() {
   const router = useRouter()
@@ -24,9 +25,7 @@ export default function LoginForm() {
     const { error: authError } = await supabase.auth.signInWithPassword({ email, password })
 
     if (authError) {
-      setError(authError.message === 'Invalid login credentials'
-        ? 'Incorrect email or password.'
-        : authError.message)
+      setError(formatAuthError(authError.message))
       setLoading(false)
       return
     }
